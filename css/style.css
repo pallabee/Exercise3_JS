@@ -8,7 +8,7 @@
         .axis text
         {
             font-family: 'Arial';
-            font-size: 13px;
+            font-size: 12px;
         }
         .tick
         {
@@ -18,5 +18,3 @@
         {
             fill: FireBrick;
         }
-
-       

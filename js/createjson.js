@@ -26,7 +26,7 @@ fs.readFile(inputFile, "utf-8", function(err, data) {
   }
 
   //Storing each line as an object,in an object array
-  Rows = [],foodgrainRows = [];
+  oilseedsRows = [],foodgrainRows = [];
   for (var i = 1, ilen = lines.length; i < ilen; i++) {
     // Code to filter bad data
     var linestr = lines[i].trim().replace(", ", " ");
@@ -42,7 +42,7 @@ fs.readFile(inputFile, "utf-8", function(err, data) {
 
         row.x = currentline[cropTypeIndex];
         row.y = parseFloat(currentline[yearIndex]);
-        Rows.push(row);
+        oilseedsRows.push(row);
       }
     }
     //Filtering data for 'Foodgrains' crop
@@ -58,7 +58,7 @@ fs.readFile(inputFile, "utf-8", function(err, data) {
     }
   }
   //Sorting data in descending order of 'Oilseeds' production
-  Rows.sort(function(a, b) {
+  oilseedsRows.sort(function(a, b) {
     return b.y - a.y;
   });
   //Sorting data in descending order of 'Foodgrains' production
@@ -66,24 +66,21 @@ fs.readFile(inputFile, "utf-8", function(err, data) {
     return b.y - a.y;
   });
 
-  //Writing to a JSON file
-  var jsonResult = JSON.stringify(Rows);
-  fs.writeFile('../data/oilseedsVsProd.json', jsonResult, function(err) {
-    if (err) {
-      console.log('There has been an error saving your json data.');
-      console.log(err.message);
-      return;
-    }
-    console.log('JSON saved successfully.');
-  });
-  //Writing to a JSON file
-  var jsonResult = JSON.stringify(foodgrainRows);
-  fs.writeFile('../data/foodgrainsVsProd.json', jsonResult, function(err) {
-    if (err) {
-      console.log('There has been an error saving your json data.');
-      console.log(err.message);
-      return;
-    }
-    console.log('JSON saved successfully.');
-  });
+  //Writing to JSON file
+  writetoFile('../data/oilseedsVsProd.json',JSON.stringify(oilseedsRows));
+
+  writetoFile('../data/foodgrainsVsProd.json',JSON.stringify(foodgrainRows));
+
+  function writetoFile(path,jsonResult){
+
+    fs.writeFile(path, jsonResult, function(err) {
+      if (err) {
+        console.log('There has been an error saving your json data.');
+        console.log(err.message);
+        return;
+      }
+      console.log('JSON saved successfully.');
+    });
+  }
+
 });
