@@ -9,6 +9,8 @@ x = d3.scale.ordinal().rangeRoundBands([0, width], .5),
 
 y = d3.scale.linear().range([height, 0]),
 
+
+
 xAxis = d3.svg.axis()
 .scale(x)
 .orient("bottom")

@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <link href="../css/style.css" rel="stylesheet">
+
  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+ <link href="../css/style.css" rel="stylesheet">
   <title>Practice JS</title>
 </head>
 <body>
   <div>
+    <h2>Links for viewing Graphs</h2>
     <ul>
-      <li><a href="#"  onclick="plotD3Graph('#canvasOilseeds', '../data/oilseedsVsProd.json');">Oilseed crop vs Production for the year 2013</a></li>
-      <li><a href="#" onclick="plotD3Graph('#canvasFoodgrains', '../data/foodgrainsVsProd.json');">Foodgrains crop vs Production for the year 2013</a></li>
-      <li><a href="#" onclick="plotD3Graph('#canvasAggrData', '../data/aggregatedData.json');">Aggregated value vs Year for all Commercial crops</a></li>
-      <li><a href="#" onclick="plotStackedGraph('#canvasStackedChart', '../data/stackedChartData.json');">Stacked chart of rice production in the 4 southern states</a></li>
+      <li><a href="../html/oilSeedsGraph.html">Oilseed crop vs Production for the year 2013</a></li>
+      <li><a href="../html/foodGrainsGraph.html">Foodgrains crop vs Production for the year 2013</a></li>
+      <li><a href="../html/aggregateGraph.html">Aggregated value vs Year for all Commercial crops</a></li>
+      <li><a href="../html/stackedGraph.html">Stacked chart of rice production in the 4 southern states</a></li>
     </ul>
   </div>
-
-  <div id="canvasOilseeds"></div>
-  <div id="canvasFoodgrains"></div>
-  <div id="canvasAggrData"></div>
-  <div id="canvasStackedChart"></div>
-
 
   <script src="../js/d3graph.js" charset="utf-8"></script>
     <script src="../js/stackedGraph.js" charset="utf-8"></script>
