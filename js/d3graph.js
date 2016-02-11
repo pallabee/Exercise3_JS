@@ -1,9 +1,9 @@
 
 function plotD3Graph(canvasId,path)
 {
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
+var margin = {top: 20, right: 20, bottom: 350, left: 40},
 width = 1200 - margin.left - margin.right,
-height = 400 - margin.top - margin.bottom,
+height = 600 - margin.top - margin.bottom,
 
 x = d3.scale.ordinal().rangeRoundBands([0, width], .5),
 
@@ -56,7 +56,7 @@ svg.append("g")
     .call(yAxis)
 .append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 6)
+    .attr("y", 3)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
     .text("Production (Tons)");

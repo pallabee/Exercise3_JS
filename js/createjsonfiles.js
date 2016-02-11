@@ -12,53 +12,15 @@ fs.readFile(inputFile, "utf-8", function(err, data) {
   //Storing column headers in an array
   var headers = lines[0].trim().split(",");
 
-//Lookup for Year (1993-2014)
-  var yearLookup = [{
-    "year": "3-1993"
-  }, {
-    "year": "3-1994"
-  }, {
-    "year": "3-1995"
-  }, {
-    "year": "3-1996"
-  }, {
-    "year": "3-1997"
-  }, {
-    "year": "3-1998"
-  }, {
-    "year": "3-1999"
-  }, {
-    "year": "3-2000"
-  }, {
-    "year": "3-2001"
-  }, {
-    "year": "3-2002"
-  }, {
-    "year": "3-2003"
-  }, {
-    "year": "3-2004"
-  }, {
-    "year": "3-2005"
-  }, {
-    "year": "3-2006"
-  }, {
-    "year": "3-2007"
-  }, {
-    "year": "3-2008"
-  }, {
-    "year": "3-2009"
-  }, {
-    "year": "3-2010"
-  }, {
-    "year": "3-2011"
-  }, {
-    "year": "3-2012"
-  }, {
-    "year": "3-2013"
-  }, {
-    "year": "3-2014"
-  }];
-//Lookup for States
+  //Lookup for Year (1993-2014)
+  var yearLookup = [];
+  for (var h = 3, hlen = headers.length; h < hlen; h++) {
+    var yrObj = new Object();
+    yrObj.year = headers[h].trim();
+    yearLookup.push(yrObj);
+  }
+
+  //Lookup for States
   var stateLookup = [{
     "region": "South",
     "state": "Agricultural Production Foodgrains Rice Yield Karnataka"
@@ -112,13 +74,16 @@ fs.readFile(inputFile, "utf-8", function(err, data) {
                   oilseedsRows.push(orow);
                 }
                 if (currentline[0].indexOf("Foodgrains") > -1) {
-                  var frow = new Object();
+                if ((currentline[0].indexOf("Total") === -1) && (currentline[0].indexOf("Volume") === -1) && (currentline[0].indexOf("Area") === -1)  && (currentline[0].indexOf("Coarse") === -1)) {
+                  
+                    var frow = new Object();
 
-                  frow.x = currentline[0];
-                  frow.y = parseFloat(currentline[23]);
-                  foodgrainRows.push(frow);
+                    frow.x = currentline[0];
+                    frow.y = parseFloat(currentline[23]);
+                    foodgrainRows.push(frow);
+                //  }
                 }
-
+              }
             }
           }
           //Check if prod yield for current year is not NA
