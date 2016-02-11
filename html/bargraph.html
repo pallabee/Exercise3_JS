@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
 
- <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
- <link href="../css/style.css" rel="stylesheet">
+    <!-- Mobile viewport optimized -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Bootstrap CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+      <!-- D3 Js -->
+   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+   <link href="../css/style.css" rel="stylesheet">
   <title>Practice JS</title>
 </head>
-<body>
-  <div>
-    <h2>Links for viewing Graphs</h2>
-    <ul>
-      <li><a href="../html/oilSeedsGraph.html">Oilseed crop vs Production for the year 2013</a></li>
-      <li><a href="../html/foodGrainsGraph.html">Foodgrains crop vs Production for the year 2013</a></li>
-      <li><a href="../html/aggregateGraph.html">Aggregated value vs Year for all Commercial crops</a></li>
-      <li><a href="../html/stackedGraph.html">Stacked chart of rice production in the 4 southern states</a></li>
-    </ul>
-  </div>
+<body id="bargraph" class ="bodycolour">
+  <div class="container col-12" id="main">
+    <nav class="navbar navbar-inverse navbar-fixed-top col-12">
 
-  <script src="../js/d3graph.js" charset="utf-8"></script>
-    <script src="../js/stackedGraph.js" charset="utf-8"></script>
+      <div class="container-fluid navbar-left">
+
+      <h2  id="heading">Links for viewing Graphs </h2>
+      </div>
+    </nav>
+
+      <div class="btn-group col-12" id="linksbtn">
+        <a href="../html/oilSeedsGraph.html" class="btn btn-primary" role="button">Oilseed crop vs Production for 2013</a>
+        <!-- <br /> -->
+        <a href="../html/foodGrainsGraph.html" class="btn btn-success" role="button">Foodgrains crop vs Production 2013</a>
+        <!-- <br /> -->
+          <a href="../html/aggregateGraph.html" class="btn btn-info" role="button">Aggregated value vs Year for Commercial crops</a>
+          <!-- <br /> -->
+            <a href="../html/stackedGraph.html" class="btn btn-danger" role="button">Stacked chart of rice production</a>
+
+      </div>
+    
+  <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
 

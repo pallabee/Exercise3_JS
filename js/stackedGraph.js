@@ -1,8 +1,8 @@
 function plotStackedGraph(canvasId,path)
 {
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
+var margin = {top: 80, right: 20, bottom: 30, left: 40},
     width = 1000 - margin.left - margin.right,
-    height = 750 - margin.top - margin.bottom;
+    height = 400 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .2);
@@ -38,8 +38,6 @@ d3.json(path, function(error, data) {
     d.prod = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
     d.total = d.prod[d.prod.length - 1].y1;
   });
-
-  data.sort(function(a, b) { return b.total - a.total; });
 
   x.domain(data.map(function(d) { return d.Year; }));
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
@@ -80,16 +78,19 @@ d3.json(path, function(error, data) {
       .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
   legend.append("rect")
-      .attr("x", width - 18)
+      .attr("x", width)
+      .attr("y","-80px")
       .attr("width", 18)
       .attr("height", 18)
+
       .style("fill", color);
 
   legend.append("text")
-      .attr("x", width - 24)
+      .attr("x", width - 6)
       .attr("y", 9)
-      .attr("dy", ".35em")
+      .attr("dy", "-75px")
       .style("text-anchor", "end")
+      .attr("font-size", 10)
       .text(function(d) { return d; });
 
 });
