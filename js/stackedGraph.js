@@ -22,11 +22,20 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .tickFormat(d3.format(".2s"));
 
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function(d) {
+        return "<strong>Production:</strong> <span style='color:red'>" + d.y1 + "</span>";
+      })
+
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
 
 d3.json(path, function(error, data) {
   if (error) throw error;
@@ -61,7 +70,9 @@ d3.json(path, function(error, data) {
       .data(data)
     .enter().append("g")
       .attr("class", "g")
-      .attr("transform", function(d) { return "translate(" + x(d.Year) + ",0)"; });
+      .attr("transform", function(d) { return "translate(" + x(d.Year) + ",0)"; })
+      // .on('mouseover', tip.show)
+      // .on('mouseout', tip.hide)
 
   state.selectAll("rect")
       .data(function(d) { return d.prod; })

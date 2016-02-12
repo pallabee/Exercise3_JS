@@ -1,6 +1,7 @@
 
 function plotD3Graph(canvasId,path)
 {
+
 var margin = {top: 20, right: 20, bottom: 350, left: 40},
 width = 1000 - margin.left - margin.right,
 height = 600 - margin.top - margin.bottom,
@@ -17,24 +18,23 @@ xAxis = d3.svg.axis()
 yAxis = d3.svg.axis()
 .scale(y)
 .orient("left")
-.ticks(10),
+.ticks(10);
 
-// var tip = d3.tip()
-//   .attr('class', 'd3-tip')
-//   .offset([-10, 0])
-//   .html(function(d) {
-//     return "<strong>Yield:</strong> <span style='color:red'>" + d.y + "</span>";
-//   });
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Production:</strong> <span style='color:red'>" + d.y + "</span>";
+  })
 
 svg = d3.select(canvasId).append("svg")
-
-
 
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
 .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
+svg.call(tip);
 
 d3.json(path, function(error, data) {
 data.forEach(function (d) {
@@ -57,8 +57,6 @@ svg.append("g")
     .attr("dy", "-.55em")
     .attr("transform", "rotate(-90)" );
 
-    // svg.call(tip);
-
 svg.append("g")
     .attr("class", "y axis")
     .call(yAxis)
@@ -76,7 +74,10 @@ svg.selectAll("bar")
     .attr("x", function(d) { return x(d.x); })
     .attr("width", x.rangeBand())
     .attr("y", function(d) { return y(d.y); })
-    .attr("height", function(d) { return height - y(d.y); });
+    .attr("height", function(d) { return height - y(d.y); })
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)
 
 });
+
 }
