@@ -75,7 +75,7 @@ fs.readFile(inputFile, "utf-8", function(err, data) {
                 }
                 if (currentline[0].indexOf("Foodgrains") > -1) {
                 if ((currentline[0].indexOf("Total") === -1) && (currentline[0].indexOf("Volume") === -1) && (currentline[0].indexOf("Area") === -1)  && (currentline[0].indexOf("Coarse") === -1)) {
-                  
+
                     var frow = new Object();
 
                     frow.x = currentline[0];

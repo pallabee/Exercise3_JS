@@ -13,6 +13,10 @@ var y = d3.scale.linear()
 var color = d3.scale.ordinal()
     .range(["#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
+var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
@@ -25,9 +29,9 @@ var yAxis = d3.svg.axis()
     var tip = d3.tip()
       .attr('class', 'd3-tip')
       .offset([-10, 0])
-      .html(function(d) {
-        return "<strong>Production:</strong> <span style='color:red'>" + d.y1 + "</span>";
-      })
+      // .html(function(d) {
+      //   return "<strong>Production:</strong> <span style='color:red'>" + d.y + "</span>";
+      // })
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -71,8 +75,8 @@ d3.json(path, function(error, data) {
     .enter().append("g")
       .attr("class", "g")
       .attr("transform", function(d) { return "translate(" + x(d.Year) + ",0)"; })
-      // .on('mouseover', tip.show)
-      // .on('mouseout', tip.hide)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
 
   state.selectAll("rect")
       .data(function(d) { return d.prod; })
@@ -80,7 +84,19 @@ d3.json(path, function(error, data) {
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.y1); })
       .attr("height", function(d) { return y(d.y0) - y(d.y1); })
-      .style("fill", function(d) { return color(d.name); });
+      .style("fill", function(d) { return color(d.name); })
+      .on("mouseover", function(d) {
+              div.transition()
+                  .duration(200)
+                  .style("opacity", 1);
+              div .html(d.name +" : " + (parseFloat(d.y1)-parseFloat(d.y0)))
+                  .style("left", (d3.event.pageX) + "px")
+                  .style("top", (d3.event.pageY - 28) + "px");
+              })
+          .on("mouseout", function(d) {
+              div.transition()
+                  .duration(500)
+                  .style("opacity", 0);});
 
   var legend = svg.selectAll(".legend")
       .data(color.domain().slice().reverse())
